@@ -49,8 +49,11 @@ function App() {
     }
   }
 
+  const checkEndGame = boardToCheck => boardToCheck.every(square => square !== null)
+
   const updateBoard = (index) => {
     if (board[index] || winner) return
+
     const newBoard = [...board];
     newBoard[index] = turn;
     setBoard(newBoard);
@@ -60,6 +63,8 @@ function App() {
 
     const newWinner = checkWinner(newBoard);
     if (newWinner) setWinner(newWinner);
+
+    if (checkEndGame(newBoard)) setWinner(false);
   }
 
   const resetGame = () => {
@@ -71,6 +76,7 @@ function App() {
   return (
     <main className='board'>
       <h1>Tic-Tac-Toe</h1>
+      <button onClick={resetGame}>Empezar de nuevo</button>
       <section className='game'>
         {board.map((_, index) => {
           return (
