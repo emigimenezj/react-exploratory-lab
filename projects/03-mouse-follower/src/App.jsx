@@ -34,8 +34,11 @@ const FollowMouse = () => {
         height: 40,
         transform: `translate(${position.x}px, ${position.y}px)`
       }}
-      ></div>
-      <button onClick={() => setEnabled(prev => !prev)}>
+      ></div>}
+      <button onClick={({clientX, clientY}) => {
+        setPosition({x: clientX, y: clientY});
+        setEnabled(prev => !prev);
+      }}>
         {enabled ? 'Desactivar' : 'Activar'} seguir puntero
       </button>
     </>
