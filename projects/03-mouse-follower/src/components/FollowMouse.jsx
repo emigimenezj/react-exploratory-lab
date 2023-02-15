@@ -28,8 +28,8 @@ export function FollowMouse() {
   return (
     <>
       {enabled && <MousePointer x={x} y={y} />}
-      <button onClick={({clientX, clientY}) => {
-        setPosition({x: clientX, y: clientY});
+      <button onClick={(event) => {
+        setPosition({ x: event.clientX, y: event.clientY });
         setEnabled(prev => !prev);
       }}>
         {enabled ? 'Desactivar' : 'Activar'} seguir puntero
