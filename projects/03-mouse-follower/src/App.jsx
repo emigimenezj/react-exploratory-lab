@@ -28,10 +28,10 @@ const FollowMouse = () => {
         borderRadius: '50%',
         opacity: 0.8,
         pointerEvents: 'none',
-        left: -20,
-        top: -20,
-        width: 40,
-        height: 40,
+        left: -15,
+        top: -15,
+        width: 30,
+        height: 30,
         transform: `translate(${position.x}px, ${position.y}px)`
       }}
       ></div>}
