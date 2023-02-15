@@ -21,7 +21,7 @@ const FollowMouse = () => {
 
   return (
     <>
-      <div style={{
+      {enabled && <div style={{
         position: 'absolute',
         backgroundColor: '#09F',
         border: '1px solid #000',
