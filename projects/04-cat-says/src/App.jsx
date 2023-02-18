@@ -1,37 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useCatFact } from './hooks/useCatFact';
+import { useCatImage } from './hooks/useCatImage';
 import './App.css'
 
-const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact';
-//const CAT_ENDPOINT_IMAGE_URL = `https://cataas.com/cat/says/${word}?size=50&color=red&json=true`;
-const CAT_PREFIX_IMAGE_URL = 'https://cataas.com'
-
 export function App() {
-  const [fact, setFact] = useState();
-  const [imageUrl, setImageUrl] = useState();
-
-  useEffect(() => {
-    fetch(CAT_ENDPOINT_RANDOM_FACT)
-      .then(res => res.json())
-      .then(data => {
-        const { fact } = data;
-        setFact(fact);
-
-        const first3Words = fact.split(' ', 3).join(' ');
-        
-        fetch(`https://cataas.com/cat/says/${first3Words}?size=50&color=red&json=true`)
-          .then(res => res.json())
-          .then(data => {
-            const { url } = data;
-            setImageUrl(url);
-          });
-      });
-  }, []);
+  const { fact, refreshFact } = useCatFact(); // TODO: there is a bug, some facts has '/' character and IMAGE API return an error fetch
+  const { imageUrl } = useCatImage({ fact });
 
   return (
     <main>
       <h1>App de gatitos</h1>
+
+      <button onClick={refreshFact}>Get new fact</button>
+
       {fact && <p>{fact}</p>}
-      {imageUrl && <img src={CAT_PREFIX_IMAGE_URL + imageUrl} alt={`Image extracted using the first three words of the fact: ${fact}`} />}
+      {imageUrl && <img src={imageUrl} alt={`Image extracted using the first three words of the fact: ${fact}`} />}
     </main>
-  )
+  );
 }
