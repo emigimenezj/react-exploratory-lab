@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import './App.css'
 
 const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact';
 //const CAT_ENDPOINT_IMAGE_URL = `https://cataas.com/cat/says/${word}?size=50&color=red&json=true`;
