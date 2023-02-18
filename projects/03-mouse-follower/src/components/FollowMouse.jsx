@@ -23,7 +23,7 @@ export function FollowMouse() {
     return () => 
       document.body.classList.remove('no-cursor');
     
-  }, [enabled])
+  }, [enabled]);
 
   return (
     <>
