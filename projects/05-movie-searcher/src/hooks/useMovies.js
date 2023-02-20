@@ -1,8 +1,13 @@
+import { useState } from 'react';
+
 import moviesResponse from '../mocks/with-results.json';
 import errorResponse from '../mocks/no-results.json';
 
-export function useMovies() {
-  const movies = moviesResponse.Search;
+const API_KEY = import.meta.env.VITE_OMDBAPI_KEY;
+
+export function useMovies({ search }) {
+  const [responseMovies, setResponseMovies] = useState([]);
+  const movies = responseMovies.Search;
 
   const mappedMovies = movies?.map(movie => ({
     id: movie.imdbID,
@@ -11,5 +16,15 @@ export function useMovies() {
     poster: movie.Poster
   }));
 
-  return { movies: mappedMovies };
+  const getMovies = () => {
+    if (search) {
+      fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${search}`)
+        .then(res => res.json())
+        .then(json => setResponseMovies(json));
+    } else {
+      setResponseMovies(errorResponse)
+    }
+  }
+  
+  return { movies: mappedMovies, getMovies };
 }
