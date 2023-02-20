@@ -1,13 +1,18 @@
+import { Movies } from './components/Movies';
 import moviesResponse from './mocks/with-results.json';
 import errorResponse from './mocks/no-results.json';
 import './App.css'
 
+
 function App() {
-
   const movies = moviesResponse.Search;
-  const hasMovies = movies?.length > 0;
 
-  console.log(movies, hasMovies);
+  const mappedMovies = movies?.map(movie => ({
+    id: movie.imdbID,
+    title: movie.Title,
+    year: movie.Year,
+    poster: movie.Poster
+  }));
 
   return (
     <div className='page'>
@@ -19,23 +24,7 @@ function App() {
       </header>
       
       <main>
-        {hasMovies
-          ? (
-            <ul>
-              {
-                movies.map(movie => (
-                  <li key={movie.imdbID}>
-                    <h3>{movie.Title}</h3>
-                    <p>{movie.Year}</p>
-                    <img src={movie.Poster} alt={`Poster of ${movie.Title}`} />
-                  </li>
-                ))
-              }
-            </ul>
-          ) : (
-            <p>No se encontraron películas para esta búsqueda.</p>
-          )
-        }
+        <Movies movies={mappedMovies}/>
       </main>
     </div>
   );
