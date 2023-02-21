@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useMovies } from './hooks/useMovies';
-
 import { Movies } from './components/Movies';
+import debounce from 'just-debounce-it';
 
 import './App.css';
 
@@ -48,14 +48,23 @@ function App() {
   const { search, updateSearch, error } = useSearch();
   const { movies, getMovies, loading } = useMovies({ search, sort });
   
-  const handleSubmit = event => {
+  const debouncedGetMovies = useCallback(
+    debounce(search => getMovies({ search }), 750),
+    [getMovies]
+  );
+
+  const handleSubmit = (event) => {
     event.preventDefault();
     getMovies({ search });
   }
 
   const handleSort = () => setSort(!sort);
 
-  useEffect(() => console.log('check'),[getMovies])
+  const handleChange = (event) => {
+    const newSearch = event.target.value;
+    updateSearch(newSearch);
+    debouncedGetMovies(newSearch);
+  }
 
   return (
     <div className='page'>
@@ -63,7 +72,7 @@ function App() {
 
         <form className='form' onSubmit={handleSubmit}>
 
-          <input onChange={({target}) => updateSearch(target.value)}
+          <input onChange={handleChange}
             value={search}
             name='query'
             placeholder='Avengers, Star Wars, The Matrix...'>
