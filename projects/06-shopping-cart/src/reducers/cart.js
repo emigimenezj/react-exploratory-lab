@@ -23,7 +23,7 @@ export const cartReducer = (state, {type, payload}) => {
       ];
     },
     'REMOVE_FROM_CART': () => state.filter(item => item.id !== payload.id),
-    'CLEAR_CART': () => cartInitialState
+    'CLEAR_CART': () => []
   }
 
   const newState = HANDLERS[type]();
