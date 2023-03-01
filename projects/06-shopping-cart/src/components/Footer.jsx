@@ -1,11 +1,13 @@
+import { useContext } from 'react';
+import { FiltersContext } from '../context/filters';
 import './Footer.css'
 
-export function Footer({ filters }) {
+export function Footer() {
+  const { filters } = useContext(FiltersContext);
+
   return (
     <footer className="footer">
-      {
-        JSON.stringify(filters, null, 2)
-      }
+      {JSON.stringify(filters, null, 2)}
     </footer>
   );
 }

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useFilters } from './hooks/useFilters';
 
 import { Products } from './components/Products';
@@ -10,17 +9,16 @@ import { IS_DEVELOPMENT } from './config';
 
 
 function App() {
-  const [products] = useState(initialProducts);
-  const { filters, filterProducts, setFilters } = useFilters();
+  const { filterProducts } = useFilters();
 
-  const filteredProducts = filterProducts(products);
+  const filteredProducts = filterProducts(initialProducts);
 
   return (
     <>
       <Header />
       <Products products={filteredProducts} />
       {IS_DEVELOPMENT
-          ? <Footer filters={filters} />
+          ? <Footer />
           : null}
     </>
   );
