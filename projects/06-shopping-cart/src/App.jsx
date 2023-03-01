@@ -6,6 +6,8 @@ import { Footer } from './components/Footer';
 
 import { products as initialProducts } from './mocks/products.json';
 import { IS_DEVELOPMENT } from './config';
+import { Cart } from './components/Cart';
+import { CartProvider } from './context/cart';
 
 
 function App() {
@@ -14,13 +16,12 @@ function App() {
   const filteredProducts = filterProducts(initialProducts);
 
   return (
-    <>
+    <CartProvider>
       <Header />
+      <Cart />
       <Products products={filteredProducts} />
-      {IS_DEVELOPMENT
-          ? <Footer />
-          : null}
-    </>
+      {IS_DEVELOPMENT && <Footer />}
+    </CartProvider>
   );
 }
 
