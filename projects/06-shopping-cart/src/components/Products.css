@@ -45,3 +45,7 @@
   object-fit: cover;
   background: #fff;
 }
+
+.products button {
+  color: white;
+}
