@@ -13,7 +13,11 @@ function App() {
         {
           path: '/about',
           Component: AboutPage
-        }
+        },
+        {
+          path: '/emi',
+          Component: () => <h1>You was totally PWNED by Emi! :v</h1>
+        },
       ]} />
     </main>
   );
