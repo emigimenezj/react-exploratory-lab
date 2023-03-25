@@ -1,8 +1,11 @@
+import { lazy, Suspense } from 'react';
+
 import Router from './Router';
-import AboutPage from './pages/About';
+//import AboutPage from './pages/About';
 import HomePage from './pages/Home';
 import SearchPage from './pages/Search';
 import { Route } from './Route';
+
 
 const appRoutes = [
   {
@@ -15,13 +18,17 @@ const appRoutes = [
   },
 ];
 
+const AboutPage = lazy(() => import('./pages/About'));
+
 function App() {
   return (
     <main>
-      <Router routes={appRoutes}>
-        <Route path='/' Component={HomePage} />
-        <Route path='/about' Component={AboutPage} />
-      </Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Router routes={appRoutes}>
+          <Route path='/' Component={HomePage} />
+          <Route path='/about' Component={AboutPage} />
+        </Router>
+      </Suspense>
     </main>
   );
 }
