@@ -1,18 +1,15 @@
 import Router from './Router';
 import AboutPage from './pages/About';
 import HomePage from './pages/Home';
+import SearchPage from './pages/Search';
 
 function App() {
   return (
     <main>
       <Router routes={[
         {
-          path: '/',
-          Component: HomePage
-        },
-        {
-          path: '/about',
-          Component: AboutPage
+    path: '/search/:query',
+    Component: SearchPage
         },
         {
           path: '/emi',
