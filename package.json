@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/emigimenezj/react-exploratory-lab/issues"
   },
-  "homepage": "https://github.com/emigimenezj/react-exploratory-lab#readme"
+  "homepage": "https://github.com/emigimenezj/react-exploratory-lab#readme",
+  "dependencies": {
+    "path-to-regexp": "6.2.1"
+  }
 }
