@@ -1,5 +1,7 @@
 import { Link } from '../Link';
 
+console.log('Estamos importando About.jsx');
+
 export default function AboutPage() {
   return (
     <>
