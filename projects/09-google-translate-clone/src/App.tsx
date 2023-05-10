@@ -1,9 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 import './App.css';
 import { useStore } from './hooks/useStore';
+import { AUTO_LANGUAGE } from './constants';
+import { ArrowsIcon } from './components/icons';
 
 function App() {
 
@@ -24,9 +26,13 @@ function App() {
           {fromLanguage}
         </Col>
         <Col>
-          <button onClick={interchangeLanguage}>
-            intercabmiar
-          </button>
+          <Button
+            variant='link'
+            disabled={fromLanguage === AUTO_LANGUAGE}
+            onClick={interchangeLanguage}
+          >
+            <ArrowsIcon />
+          </Button>
         </Col>
         <Col>
           <h2>To</h2>
